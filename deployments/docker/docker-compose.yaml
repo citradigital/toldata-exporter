@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+  testnats:
+    image: nats:latest
+    ports: ["4222:4222"]
+  exporter:
+    environment:
+      NATS_URL: ${NATS_URL}
+    image: citradigital/toldata-exporter:${IMAGE_TAG}
+    build:
+      context: ../..
+      dockerfile: deployments/docker/exporter/Dockerfile
